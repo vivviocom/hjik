@@ -6,7 +6,7 @@ import { formatPrice, cx } from "../lib/format";
 import { useEffect } from "react";
 
 export function CartDrawer() {
-  const { items, isOpen, closeCart, subtotal, shipping, total, updateQuantity, removeItem } = useCart();
+  const { items, isOpen, closeCart, count, subtotal, shipping, total, updateQuantity, removeItem } = useCart();
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
@@ -32,7 +32,7 @@ export function CartDrawer() {
       >
         <div className="flex items-center justify-between h-16 px-5 border-b border-neutral-200">
           <span className="text-[12px] tracking-[0.25em] uppercase font-medium">
-            Cart ({items.length})
+            Cart ({count})
           </span>
           <button onClick={closeCart} aria-label="Close cart" className="p-2 -mr-2">
             <X size={18} />

@@ -98,8 +98,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
   if (promo) {
     if (promo.type === "percent") {
       discount = Math.round(subtotal * (promo.value / 100) * 100) / 100;
-    } else if (promoCode === "FREESHIP") {
-      shipping = 0;
+    } else if (promo.type === "fixed") {
+      if (promoCode === "FREESHIP") {
+        shipping = 0;
+      } else {
+        discount = Math.min(promo.value, subtotal);
+      }
     }
   }
 

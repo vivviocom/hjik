@@ -62,9 +62,9 @@ export default function Checkout() {
       createdAt: new Date().toISOString(),
     };
     addOrder(order);
+    clear();
     setPlaced(true);
     navigate(`/order-confirmation/${order.id}`, { state: { order }, replace: true });
-    clear();
   };
 
   return (
@@ -156,7 +156,7 @@ export default function Checkout() {
             <section className="space-y-5 animate-fade-in">
               <h2 className="text-lg font-medium">Shipping Method</h2>
               {[
-                { id: "standard", label: "Standard Shipping", desc: "3–7 business days", price: subtotal >= 80 ? 0 : 8 },
+                { id: "standard", label: "Standard Shipping", desc: "3–7 business days", price: shipping },
                 { id: "express", label: "Express Shipping", desc: "1–2 business days", price: 18 },
               ].map((opt) => {
                 const active = shipMethod === opt.id;

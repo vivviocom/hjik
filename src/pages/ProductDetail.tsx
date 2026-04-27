@@ -7,8 +7,12 @@ import { useWishlist } from "../context/WishlistContext";
 import { formatPrice, cx } from "../lib/format";
 import { ProductCard } from "../components/ProductCard";
 
-export default function ProductDetail() {
+export default function ProductDetailWrapper() {
   const { slug } = useParams();
+  return <ProductDetailInner key={slug} slug={slug} />;
+}
+
+function ProductDetailInner({ slug }: { slug: string | undefined }) {
   const product = PRODUCTS.find((p) => p.slug === slug);
   const { addItem } = useCart();
   const { has, toggle } = useWishlist();
