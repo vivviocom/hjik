@@ -61,7 +61,7 @@ export default function GameInfo({ status, turn, moveHistory, evaluation, thinki
       <div className="turn-indicator">
         <span className="turn-label">Turn:</span>
         <span className={`turn-value ${turn === 'w' ? 'white-turn' : 'black-turn'}`}>
-          {turn === 'w' ? '&#9812; White' : '&#9818; Black'}
+          {turn === 'w' ? '\u2654 White' : '\u265A Black'}
         </span>
       </div>
 

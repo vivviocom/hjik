@@ -25,6 +25,7 @@ export function useChessGame() {
   const [tournamentGamesTarget, setTournamentGamesTarget] = useState(10);
 
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const tournamentTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isPlayingRef = useRef(false);
 
   const updateStatus = useCallback((game: Chess): GameStatus => {
@@ -61,7 +62,7 @@ export function useChessGame() {
           newScore.totalGames++;
 
           if (newScore.totalGames < tournamentGamesTarget) {
-            setTimeout(() => {
+            tournamentTimerRef.current = setTimeout(() => {
               resetGame();
               startGame();
             }, 1500);
@@ -108,7 +109,7 @@ export function useChessGame() {
             newScore.totalGames++;
 
             if (newScore.totalGames < tournamentGamesTarget) {
-              setTimeout(() => {
+              tournamentTimerRef.current = setTimeout(() => {
                 resetGame();
                 startGame();
               }, 1500);
@@ -152,6 +153,10 @@ export function useChessGame() {
       clearTimeout(timerRef.current);
       timerRef.current = null;
     }
+    if (tournamentTimerRef.current) {
+      clearTimeout(tournamentTimerRef.current);
+      tournamentTimerRef.current = null;
+    }
     setIsPlaying(false);
     isPlayingRef.current = false;
     gameRef.current = new Chess();
@@ -172,6 +177,9 @@ export function useChessGame() {
     return () => {
       if (timerRef.current) {
         clearTimeout(timerRef.current);
+      }
+      if (tournamentTimerRef.current) {
+        clearTimeout(tournamentTimerRef.current);
       }
     };
   }, []);
