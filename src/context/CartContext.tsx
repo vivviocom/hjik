@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useMemo, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import type { CartItem } from "../types";
 import { PRODUCTS, PROMO_CODES } from "../data/products";
@@ -29,7 +29,7 @@ const CartContext = createContext<CartContextValue | null>(null);
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useLocalStorage<CartItem[]>("aurum:cart", []);
   const [promoCode, setPromoCode] = useLocalStorage<string | null>("aurum:promo", null);
-  const [isOpen, setIsOpen] = useLocalStorage<boolean>("aurum:cartOpen", false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const addItem = useCallback(
     (next: CartItem) => {

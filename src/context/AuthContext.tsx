@@ -42,7 +42,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         name,
         password,
       };
-      setUsers([...users, newUser]);
+      setUsers((prev) => [...prev, newUser]);
       setUser(newUser);
       return { ok: true, message: `Welcome to AURUM, ${name.split(" ")[0]}.` };
     },
